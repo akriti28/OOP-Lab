@@ -1,0 +1,61 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<string.h>
+#define MAX 20
+class stack
+{
+ int top;
+ char stack[20];
+ public:
+ stack()
+ {
+  top=-1;
+ }
+ void push(char);
+ char pop();
+};
+void stack :: push(char item)
+{
+ if(top>=MAX)
+ {
+  cout<<"\nStack overflow";
+ }
+ stack[++top]=item;
+}
+char stack :: pop()
+{
+ if(top==-1)
+ {
+  cout<<"\nEmpty Stack";
+  getch();
+  return 0;
+ }
+ return stack[top--];
+}
+void main()
+{
+ clrscr();
+ char str[20];
+ int l,i,flag=1;
+ stack s;
+ cout<<"\nEnter your string : ";
+ gets(str);
+ l=strlen(str);
+ for(i=l-1;i>=0;i--)
+  s.push(str[i]);
+ for(i=0;i<l;i++)
+ {
+  char check;
+  check=s.pop();
+  if(check!=str[l-1-i])
+  {
+   flag=0;
+   cout<<"\nNot a palindrome";
+   break;
+  }
+ }
+ if(flag)
+  cout<<"\nPalindrome";
+ getch();
+}

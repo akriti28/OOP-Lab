@@ -1,0 +1,21 @@
+
+import java.io.File;
+
+public class A1 {
+    
+public static void main(String [] args){
+String directory = "D:\\140953018";
+File f = new File(directory);
+File[] file = f.listFiles();
+if (files.length == 0) {
+    System.out.println("empty");
+} else {
+    for (File f2 : files) {
+        System.out.println(f2.getName() + " - " + f2.length());
+    }
+}
+}
+
+}
+
+

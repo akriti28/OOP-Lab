@@ -1,0 +1,156 @@
+package Lab5LE1;
+import java.util.*;
+
+class Account
+{
+	String name;
+        char type;
+	double accNo,bal,dep;
+	Scanner s=new Scanner(System.in);
+	 void GetVal()
+	{
+		
+		System.out.println("Enter customer name");
+		name=s.next();
+		System.out.println("Enter customer account number");
+		accNo=s.nextDouble();
+		System.out.println("Enter customer account type(current=c,savings =s)");
+		type=s.next().charAt(0);
+	}
+	
+	 void dispBal()
+	{
+		System.out.print("The balance amount is:"+bal+"\n");
+	}
+	
+	 double deposit()
+	{
+		System.out.println("Enter deposit amount");
+		dep=s.nextDouble();
+		bal+=dep;
+		return bal;
+	}
+	
+	 
+}
+
+class currentAccount extends Account
+{
+	
+	 void check()
+	{
+		double minBal,taxP;
+		System.out.println("Enter the minimum balance permitted");
+		minBal=s.nextDouble();
+		if(bal<minBal)
+		{
+			System.out.println("Enter service tax penalty");
+			taxP=s.nextDouble();
+			bal-=taxP;
+			System.out.println("The updated balance is:"+bal);
+		}
+	
+	}
+	
+}
+
+class savingsAccount extends Account
+{
+	double intr=0;
+	
+	 void interest()
+	{
+		double r,t;
+		System.out.println("Enter rate of interest");
+		r=s.nextDouble();
+		System.out.println("Enter the time period in years");
+		t=s.nextDouble();
+		intr=(bal*r*t)/100;
+		System.out.println("The interest is:"+intr);
+		bal+=intr;
+		System.out.println("The updated balance is:"+bal);	
+	}
+	
+         void withdraw()
+	{
+		double w;
+		System.out.println("Enter withdrawal ammount");
+		w=s.nextDouble();
+		if(bal<w)
+			System.out.println("Not enough balance");
+			
+		else
+		{	bal-=w;
+			System.out.println("The updated balance is:"+bal);
+		}		
+	}
+	
+	
+}
+
+class Lab5LE1
+{
+	public static void main(String args[])
+	{        Account a=new Account();	
+                currentAccount c=new currentAccount();
+		savingsAccount b=new savingsAccount();
+           
+		int y=0;
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter account details");
+                a.GetVal();
+		
+				if(a.type=='c'||a.type=='C')
+				{	
+                                    while(y!=4)
+				     { 
+					System.out.println("Choose one of the following \n 1.Deposit 2.Display Balance 3.Minimum Balance 4.Exit");
+					y=s.nextInt();	
+					
+						switch(y)
+						{
+							case 1:c.deposit();
+							   break;
+							case 2:c.dispBal();
+								break;
+							case 3:c.check();
+								break;
+                                                        case 4:break;
+                                                        default:System.out.println("Invalid input");
+								break;
+						}
+					}
+				}
+				
+				if(a.type=='s'||a.type=='S')
+				{
+                                	while(y!=5)
+					{	
+                                            
+                                            System.out.println("Choose one of the following \n 1.Deposit 2.Display Balance 3.Interest 4.Withdraw 5.Exit");
+                                            y=s.nextInt();	
+					
+						switch(y)
+						{
+							case 1:b.deposit();
+							   break;
+							case 2:b.dispBal();
+								break;
+							case 3:b.interest();
+								break;
+							case 4:b.withdraw();
+								break;
+                                                        case 5:break;
+							default:System.out.println("Invalid input");
+								break;
+						}
+					}
+				
+				}
+		
+		}
+	
+	}
+	
+
+

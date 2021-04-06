@@ -1,0 +1,61 @@
+#include<iostream>
+#include<string.h>
+#include<conio.h>
+
+class node{
+	public :
+	node *rcl , *lcl;
+	int info;
+	node * rcreate(node *);
+	void display(node * , int );
+
+};
+
+
+
+node * node::rcreate(node *root){
+	if(root == NULL){
+			node *temp = new node;
+			cout<<"enter value";
+			root = temp;
+			cin>>temp->info;
+			temp->lcl = temp->rcl = NULL;
+			return root;
+	}
+	else cout<<"element is present here ";
+	cout<<"continue entering the path for next element  "<<endl;
+	char c;
+	cin>>c;
+	if(c == 'L'){
+		root->lcl =	rcreate(root->lcl);
+	}
+	else root->rcl = rcreate(root->rcl);
+
+	return root;
+}
+
+
+void node::display(node *rt , int level){
+	int i;
+	if(rt == NULL  )return;
+	display(rt->rcl , level + 1);
+	for(i = 0;i<level ;i++)
+		cout<<"	";
+	cout<<rt->info<<endl;
+	display(rt->lcl , level+1);
+}
+
+int main(){
+	clrscr();
+	node *n1 = NULL, n,*n2;
+	int num,c , ele;
+	cout<<"enter no of elements";
+	cin>>num;
+	for(int i =0;i<num;i++){
+
+		n1 = n.rcreate(n1);
+	}
+	n.display(n1,0);
+	getch();
+}
+

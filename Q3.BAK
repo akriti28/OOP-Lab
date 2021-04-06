@@ -1,0 +1,101 @@
+#include<iostream>
+#include<conio.h>
+using namespace std;
+class list{
+	
+	list *lcl , *rcl;
+	int val;
+	
+	public :
+		void levelorder(list *);
+		void display(list * , int);
+		list * create(list * , int);
+		void search(list * , int);
+	
+};
+
+void list::search(list *root , int ele){
+	if(root == NULL)
+		return;
+	list * r = root;
+	while(r!=NULL){
+		if(r->val == ele){
+			cout<<"found";
+			return;
+		}
+		if(r->val > ele){
+			r = r->lcl;
+			continue;
+		}
+		if(r->val < ele){
+			r = r->rcl;
+			continue;
+		}
+		
+	}
+	cout<<"not found";
+}
+
+list* list::create(list * root , int ele){
+	if(root == NULL){
+		list * temp = new list;
+		temp->rcl = temp->lcl = NULL;
+		temp->val = ele;
+		return temp;
+	}
+
+	if(root->val > ele){
+		if(root->lcl == NULL){
+			list * temp = new list;
+			temp->rcl = temp->lcl = NULL;
+			temp->val = ele;
+			root->lcl = temp;
+			return root;
+		}
+		else
+			create(root->lcl , ele);
+	}
+	else {
+		if(root->rcl == NULL){
+			list * temp = new list;
+			temp->rcl = temp->lcl = NULL;
+			temp->val = ele;
+			root->rcl = temp;
+			return root;
+		}
+		else
+		create(root->rcl , ele);
+	}
+	return root;
+}
+
+void list::display(list *rt , int level){
+	int i;
+	if(rt == NULL  )return;
+	display(rt->rcl , level + 1);
+	for(i = 0;i<level ;i++)
+		cout<<"	";
+	cout<<rt->val<<endl;
+	display(rt->lcl , level+1);
+}
+
+
+
+int main(){
+	list l , *l1 = NULL;
+	
+	int ele , val;
+	cout<<"enter no of elelmenst";
+	cin>>ele;
+	for(int i = 0; i<ele ; i++){
+		cout<<"enter element";
+		cin>>val;
+		l1 = l.create(l1,val);
+	}
+	l.display(l1 , 0);
+	cout<<endl;
+	cout<<"enter element to search";
+	cin>>ele;
+	l.search(l1 , ele);
+	return 0 ;
+}

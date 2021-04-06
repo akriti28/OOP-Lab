@@ -1,0 +1,105 @@
+#include<iostream.h>
+#include<string.h>
+#include<conio.h>
+
+class node{
+	public :
+	node *rcl , *lcl;
+	int info;
+	node * create(node *);
+	void display(node * , int );
+	int mirror(node * , node *);
+};
+
+
+node *  node::create(node *root){
+	node *temp, *prev,*cur;
+	char d[10];
+	int i , item;
+	temp = new node;
+	cout<<"element";
+	cin>>temp->info;
+	temp->lcl = NULL;
+	temp->rcl = NULL;
+	if(root == NULL){
+		root = temp;
+		return  root;
+	}
+	cout<<"direction";
+	cin>>d;
+	prev = NULL;
+	cur = root;
+	for(i = 0; i<strlen(d) ; i++){
+		if(cur == NULL)
+			break;
+		prev = cur;
+		if(d[i] == 'L')
+			cur = cur->lcl;
+		else cur = cur->rcl;
+	}
+	if(cur!=NULL || i!=strlen(d)){
+		cout<<"imposible";
+		delete temp;
+		return root ;
+	}
+	if(d[i-1] == 'L')
+		prev->lcl = temp;
+	else prev->rcl = temp;
+	return root;
+}
+void node::display(node *rt , int level){
+	int i;
+	if(rt == NULL  )return;
+	display(rt->rcl , level + 1);
+	for(i = 0;i<level ;i++)
+		cout<<"	";
+	cout<<rt->info<<endl;
+	display(rt->lcl , level+1);
+}
+int node::mirror(node *l1 , node *l2){
+	int f;
+	if(l1->info == l2->info){
+		f = 1;
+		if(l1->lcl || l2->rcl){
+			f = mirror(l1->lcl , l2->rcl);
+			if(f == 0)
+				return f;
+		}
+		if(l1->rcl || l2->lcl){
+			f = mirror(l1->rcl , l2->lcl);
+			if(f == 0)
+				return f;
+		}
+		return f;
+	}
+	else return 0;
+}
+
+
+int main(){
+	clrscr();
+	node *n1 = NULL, n,*n2;
+	int num,c , ele;
+	cout<<"enter no of elements";
+	cin>>num;
+	for(int i =0;i<num;i++){
+
+		n1 = n.create(n1);
+	}
+	n.display(n1,0);
+	cout<<"enter no of elelmenst";
+	cin>>ele;
+	int val;
+	node *l3 = NULL , l;
+	for(i = 0; i<ele ; i++){
+		l3 = l.create(l3);
+	}
+	l.display(l3 , 0);
+	cout<<endl<<"mirror? ";
+	if(l.mirror(n1 , l3))
+		cout<<"true";
+	else
+		cout<<"false";
+
+	getch();
+}

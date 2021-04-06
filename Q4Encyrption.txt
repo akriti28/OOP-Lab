@@ -1,0 +1,38 @@
+import java.io.*;
+
+public class Q4Encryption {
+  
+    public static void main(String[] args) {
+        int vowels = 0 , words = 1 , lines = 1 , count = 0;
+        try{
+            FileInputStream fis = new FileInputStream("D:\\140953018\\Text Files\\1EncryptionQ4.txt");
+            FileOutputStream fos = new FileOutputStream("D:\\140953018\\Text Files\\2EncryptionQ4.txt");
+            boolean ioe = false;
+            while(!ioe){
+                int i = fis.read();
+                fos.write(i+3);
+                if(i == -1)
+                    ioe = true;
+            }
+        }
+        catch(Exception e){
+            
+        }
+        try{
+            FileInputStream fis1 = new FileInputStream("D:\\140953018\\Text Files\\2EncryptionQ4.txt");
+            FileOutputStream fis2 = new FileOutputStream("D:\\140953018\\Text Files\\3EncryptionQ4.txt");
+            boolean ioe = false;
+            while(!ioe){
+                int i = fis1.read();
+                fis2.write(i-3);
+                if(i == -1)
+                    ioe = true;
+            }
+        }
+        catch(Exception e){
+            
+        }
+        
+    }
+}
+

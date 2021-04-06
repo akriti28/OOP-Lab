@@ -1,0 +1,38 @@
+import java.io.*;
+
+public class Q3 {
+    public static void main(String[] args) {
+        int count1 = 0 , count2 = 1 , count3 = 1 , count4 = 0;
+        try{
+            FileInputStream fis = new FileInputStream("D:\\140953018\\Text Files\\example.txt");
+            boolean ioe = false;
+            while(!ioe){
+                int i = fis.read();
+                count4++;
+                switch(i){
+                    case 'A' :
+                    case 'a' :
+                    case 'E' :
+                    case 'e' :
+                    case 'I' :
+                    case 'i' :
+                    case 'O' :
+                    case 'o' :
+                    case 'U' :
+                    case 'u' : count1++;
+                        break;
+                    case ' ' : count2++;
+                        break;
+                    case '\n' : count3++;
+                            break;
+                } 
+                if(i == -1)
+                    ioe = true;
+            }
+        }
+        catch(Exception e){ System.out.println(e);
+            
+        }
+        System.out.println("vowels = " + count1 + "\nwords = " + count2 + "\nlines = " + count3 + "\ncharecters = " + count4);
+    }
+}
